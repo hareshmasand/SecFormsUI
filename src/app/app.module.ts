@@ -4,12 +4,15 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import {MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { PaginationExampleComponent } from './pagination-example/pagination-example.component';
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    PaginationExampleComponent, 
   ],
   imports: [
     BrowserModule,
@@ -17,7 +20,8 @@ import {MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatTableModule,
     NoopAnimationsModule,
     HttpClientModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]
