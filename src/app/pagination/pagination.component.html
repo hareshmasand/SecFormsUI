@@ -1,0 +1,97 @@
+<meta http-equiv="cache-control" content="no-cache, must-revalidate, post-check=0, pre-check=0">
+<meta http-equiv="expires" content="0">
+<meta http-equiv="pragma" content="no-cache">
+
+<div class="row" style="display:inline-block">
+        <label>Transaction Date:  </label>    
+        <input [(ngModel)]="dateInput" matInput [matDatepicker]="picker" placeholder="YYYY/MM/DD" (dateChange)="changeEvent($event)" readonly="true">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker ></mat-datepicker>
+      
+        <div class="row" style="display:inline-block">
+          <label>Ticker:  </label>
+          <input [(ngModel)]="ticker" class="no-border-input font-size-change input-s-custom">
+        </div>
+      </div>
+     <br><br>
+      <div class="row">
+          <div>
+              <label>Transaction Code:  </label>
+              <input [(ngModel)]="txnCode"  class="no-border-input font-size-change input-x-custom">
+          </div>
+      </div>
+      <br><br>   
+      <div>
+          <div class="div-padding">
+              <button class="button" (click)="applyFilter()">Apply Filter</button>
+              <button class="button" mat-raised-button color="primary" (click)="resetFilter()">Reset Filter</button>
+          </div>
+          
+      </div>
+
+<br>
+
+
+<label [hidden]="!areRecordsPresent"><h3>No Records to display!</h3></label>
+ 
+<div class="mat-elevation-z8" [hidden]="areRecordsPresent">
+    <table mat-table [dataSource]="dataSource" matSort (matSortChange)="onSort($event)">
+  
+      <!-- Position Column -->
+      <ng-container matColumnDef="tradeDate">
+        <th mat-header-cell *matHeaderCellDef> Date </th>
+        <td mat-cell *matCellDef="let element"> {{element.tradeDate}} </td>
+      </ng-container>
+
+       <!-- Position Column -->
+       <ng-container matColumnDef="formType">
+        <th mat-header-cell *matHeaderCellDef> Form type </th>
+        <td mat-cell *matCellDef="let element"> {{element.formType}} </td>
+      </ng-container>
+  
+      <!-- Name Column -->
+      <ng-container matColumnDef="secTitle">
+        <th mat-header-cell *matHeaderCellDef> Title </th>
+        <td mat-cell *matCellDef="let element"> {{element.secTitle}} </td>
+      </ng-container>
+  
+      <!-- Weight Column -->
+      <ng-container matColumnDef="txnCode">
+        <th mat-header-cell *matHeaderCellDef> Code </th>
+        <td mat-cell *matCellDef="let element"> {{element.txnCode}} </td>
+      </ng-container>
+  
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="shares">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Shares </th>
+        <td mat-cell *matCellDef="let element"> {{element.shares}} </td>
+      </ng-container>
+
+       <!-- Symbol Column -->
+       <ng-container matColumnDef="sharePrice">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Price </th>
+        <td mat-cell *matCellDef="let element"> {{element.sharePrice}} </td>
+      </ng-container>
+
+       <!-- Symbol Column -->
+       <ng-container matColumnDef="value" >
+        <th mat-header-cell *matHeaderCellDef> Value </th>
+        <td mat-cell *matCellDef="let element"> {{element.value}} </td>
+      </ng-container>
+
+      
+       <!-- Symbol Column -->
+       <ng-container matColumnDef="ticker">
+        <th mat-header-cell *matHeaderCellDef> Ticker </th>
+        <td mat-cell *matCellDef="let element"> {{element.ticker}} </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  
+    <mat-paginator [length]="totalCount" [pageIndex]="pageIdx" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 20]"
+                   showFirstLastButtons 
+                   aria-label="Select page of periodic elements" (page)="onPaginateChange($event)">
+    </mat-paginator>
+  </div>

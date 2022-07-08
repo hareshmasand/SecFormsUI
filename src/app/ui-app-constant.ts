@@ -5,6 +5,6 @@ import {Injectable} from '@angular/core';
 })
 
 export class UiAppConstant {
-    public BASE_URL: string = 'http://localhost:8080';
+    public BASE_URL: string = 'http://localhost:9001';
 }
 

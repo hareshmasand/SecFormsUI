@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
 import {MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { PaginationComponent } from './pagination/pagination.component';
 import {MatExpansionModule} from '@angular/material/expansion';
@@ -14,10 +14,16 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatMomentDateModule} from '@angular/material-moment-adapter';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { FormsModule } from '@angular/forms';
+import {BasicInterceptor} from './interceptor/basic-interceptor';
+import {MatSortModule} from '@angular/material/sort';
+import { ProgressSpinnerComponent } from './progress-spinner/progress-spinner.component';
+import { MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 @NgModule({
   declarations: [
     AppComponent,
-    PaginationComponent 
+    PaginationComponent,
+    ProgressSpinnerComponent 
   ],
   imports: [
     BrowserModule,
@@ -31,9 +37,13 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     MatIconModule,
     MatDatepickerModule,
     MatMomentDateModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    FormsModule,
+    MatSortModule,
+    MatDialogModule
   ],
-  providers: [],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: BasicInterceptor, multi: true},
+    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true}}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
